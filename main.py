@@ -43,7 +43,7 @@ while True:
         '\n''5 - Doce de leite')
         sleep(15)
         system('cls')
-        while True:
+        while True: # escolhendo o sabor do whey
             sabor = input('Digite o dígito correspondente ao sabor desejado: ')
             if sabor == '1':
                 system('cls')
@@ -72,7 +72,7 @@ while True:
         pesquisa = 'whey protein concentrado 1kg'
         break
 
-    elif pesquisa == '2':
+    elif pesquisa == '2': # escolhendo o tipo de creatina
         system('cls')
         print('Ótima escolha! Você tem direito a escolher as seguintes opções:' \
         '\n''1 - Creatina normal (64,90 à vista, 72,00 no cartão)' \
@@ -95,7 +95,7 @@ while True:
                 continue
         break
 
-    elif pesquisa == '3':
+    elif pesquisa == '3': # escolhendo o sabor do pré-treino
         system('cls')
         print('Ótima escolha! Você tem direito a escolher os seguintes sabores:' \
         '\n''1 - Limão' \
@@ -292,11 +292,11 @@ try:
     sleep(1)
     press('enter') # pressiona enter para validar o CPF
     sleep(5)
-    if login:
+    if login: # entrando na conta do usuário
         write(senha)
         press('enter')
         sleep(5)
-    else:
+    else: # criando uma conta para o usuário
         campo_nome = driver.find_element(By.ID, 'nome-cadastro')
         campo_nome.click()
         sleep(1)
