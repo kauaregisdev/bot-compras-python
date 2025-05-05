@@ -1,3 +1,36 @@
+def gen_cpf():
+    from random import randint
+    cpf_input = ''
+    soma_cpf = 0
+    multi = 10
+    
+    for i in range(9):
+        cpf_input += str(randint(0, 9)) 
+
+    for digito in cpf_input:     
+        soma_cpf += multi*(int(digito))
+        multi -= 1
+
+    mult_cpf = soma_cpf * 10
+    ver1_cpf = mult_cpf % 11
+    ver1_cpf = 0 if ver1_cpf > 9 else ver1_cpf
+            
+    soma_cpf = 0
+    multi = 11
+    cpf_input = cpf_input + str(ver1_cpf)
+
+    for digito in cpf_input:
+        soma_cpf += multi*(int(digito))
+        multi -= 1
+
+    mult_cpf = soma_cpf * 10
+    ver2_cpf = mult_cpf % 11
+    ver2_cpf = 0 if ver2_cpf > 9 else ver2_cpf
+            
+    cpf_input = cpf_input + str(ver2_cpf)
+
+    print(f'O CPF gerado é {cpf_input}.')
+
 def get_cpf(a):
     from os import system
     soma_cpf = 0

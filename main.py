@@ -3,9 +3,6 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.ui import WebDriverWait
-from pyautogui import write, press
 from os import system
 from time import sleep
 sabor = None
@@ -320,12 +317,11 @@ try:
     sleep(1)
     driver.execute_script("arguments[0].value = arguments[1];", campo_cpf, cpf) # não está funcionando corretamente, ver depois
     sleep(1)
-    press('enter') # pressiona enter para validar o CPF
+    campo_cpf.send_keys(Keys.ENTER) # pressiona enter para validar o CPF
     sleep(5)
 
     if login: # entrando na conta do usuário
-        write(senha)
-        press('enter')
+        ... # preencher os dados de login (incompleto, erro ao tentar achar a caixa de texto)
         sleep(5)
 
     else: # criando uma conta para o usuário
