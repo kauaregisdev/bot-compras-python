@@ -227,7 +227,7 @@ driver = webdriver.Chrome(service=service, options=options) # verifica se o cami
 
 try:
     # abrindo um site no chromium
-    driver.get('https://gsuplementos.com.br')
+    driver.get('https://gsuplementos.com.br') # abre o site da Growth
     sleep(5) # espera 5 segundos
 
     # localizando a barra de pesquisa
@@ -285,10 +285,10 @@ try:
     sleep(5)
     
     # preenchendo os dados pessoais
-    campo_cpf = driver.find_element(By.CLASS_NAME, 'mainBox-conteudo-form-input-validacao')
+    campo_cpf = driver.find_element(By.CLASS_NAME, 'mainBox-conteudo-form-input-validacao') # localiza o campo de CPF
     campo_cpf.click() # clica no campo de CPF
     sleep(1)
-    driver.execute_script("arguments[0].value = arguments[1];", campo_cpf, cpf) # não está funcionando corretamente
+    driver.execute_script("arguments[0].value = arguments[1];", campo_cpf, cpf) # não está funcionando corretamente, ver depois
     sleep(1)
     press('enter') # pressiona enter para validar o CPF
     sleep(5)
