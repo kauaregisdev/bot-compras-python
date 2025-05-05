@@ -45,19 +45,13 @@ def get_cpf(a):
         if a == cpf_calculo:
             return True
         else:
-            print(f'Este CPF não é válido.')
             return False
 
 def get_cep(a):
-    from os import system
-
     if len(a) == 8 and a.isdigit():
-        system('cls')
         # Inserindo um hífen no meio do CEP
         return True
     else:
-        system('cls')
-        print('CEP inválido.')
         return False
 
 def get_senha(a, b):
@@ -88,69 +82,32 @@ def get_senha(a, b):
             system('cls')
             print('A senha deve ter pelo menos 6 caracteres.')
     else:
-        system('cls')
-        print('Digite "s" ou "n".')
         return False
 
 def get_nome(a):
-    from os import system
-    while True:
-        a = input('Digite seu nome completo: ')
-        if not ' ' in a:
-            system('cls')
-            print('Digite seu nome completo.')
-            continue
-        else:
-            system('cls')
-            break
-    return a
+    if not ' ' in a:
+        return False
+    else:
+        return a
 
-def get_email():
-    from os import system
+def get_email(a):
     from email_validator import validate_email, EmailNotValidError
-    while True:
-        print('Digite seu e-mail abaixo. Certifique-se de que o e-mail está correto, ou o bot não funcionará!')
-        email = input('')
-        system('cls')
-        try:
-            validate_email(email)
-            return email
-        except EmailNotValidError as e:
-            print('Digite um e-mail válido.')
-            continue
+    try:
+        validate_email(a)
+        return a
+    except EmailNotValidError as e:
+        return False
     
-def get_telefone():
-    from os import system
-    while True:
-        telefone = input('Digite seu telefone (apenas números): ')
-        if not telefone.isnumeric():
-            system('cls')
-            print('Digite números, sem letras ou espaços vazios.')
-            continue
-        if len(telefone) != 11:
-            system('cls')
-            print('Digite o DDD e o número do telefone.')
-            continue
-        else:
-            system('cls')
-            telefone = f"({telefone[:2]}) {telefone[2:7]}-{telefone[7:]}"
-            break
-    return telefone
+def get_telefone(a):
+    if not a.isnumeric():
+        return False
+    if len(a) != 11:
+        return False
+    else:
+        return a
 
-def get_sexo():
-    from os import system
-    while True:
-        sexo = input('Digite seu sexo (m/f): ')
-        if sexo.lower() == 'm':
-            system('cls')
-            sexo = 'Masculino'
-            break
-        elif sexo.lower() == 'f':
-            system('cls')
-            sexo = 'Feminino'
-            break
-        else:
-            system('cls')
-            print('Sexo inválido.')
-            continue
-    return sexo
+def get_sexo(a):
+    if a in ['m', 'M', 'f', 'F']:
+        return a
+    else:
+        return False

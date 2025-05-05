@@ -12,7 +12,7 @@ sabor = None
 senha = None
 nome = None
 email = None
-telefone = None
+tel = None
 sexo = None
 
 # introduzindo o bot
@@ -169,8 +169,7 @@ while True:
 # recebendo o CEP do usuário
 while True:
     cep = input('Digite o seu CEP: ')
-    f.get_cep(cep) # chamando a função de validação de CEP
-    if not f.get_cep(cep):
+    if not f.get_cep(cep): # chamando a função de validação de CEP
         system('cls')
         print('CEP inválido.')
         continue
@@ -191,10 +190,41 @@ while True:
         break
 
 if not login:
-    f.get_nome() # chamando a função de validação de nome
-    f.get_email() # chamando a função de validação de email
-    f.get_telefone() # chamando a função de validação de telefone
-    f.get_sexo() # chamando a função de validação de sexo
+    while True: # recebendo o nome completo do usuário
+        nome = input('Digite o seu nome completo: ') 
+        if not f.get_nome(nome): # chamando a função de validação de nome
+            system('cls')
+            print('Nome inválido.')
+            continue
+        else:
+            system('cls')
+            break
+
+    while True:
+        email = input('Digite o seu e-mail: ')
+        if not f.get_nome(email): # chamando a função de validação de nome
+            system('cls')
+            print('E-mail inválido.')
+            continue
+        else:
+            system('cls')
+            break
+    
+    while True:
+        print('Abaixo, digite o seu telefone (apenas números, com DDD e 9 na frente). Ex.: 85988888888 ')
+        tel = input('') 
+        if not f.get_telefone(tel): # chamando a função de validação de telefone
+            system('cls')
+            print('Telefone inválido.')
+            continue
+        else:
+            system('cls')
+            break
+
+    while True:
+        sexo = input('Digite o seu sexo, masculino ou feminino (m/f): ')
+        if not f.get_sexo(sexo):
+            ... # chamando a função de validação de sexo
 
 # escolhendo o cupom de desconto
 while True:
@@ -292,10 +322,12 @@ try:
     sleep(1)
     press('enter') # pressiona enter para validar o CPF
     sleep(5)
+
     if login: # entrando na conta do usuário
         write(senha)
         press('enter')
         sleep(5)
+
     else: # criando uma conta para o usuário
         campo_nome = driver.find_element(By.ID, 'nome-cadastro')
         campo_nome.click()
@@ -312,10 +344,10 @@ try:
         campo_telefone = driver.find_element(By.ID, 'celular-cadastro')
         campo_telefone.click()
         sleep(1)
-        campo_telefone.send_keys(telefone)
+        campo_telefone.send_keys(tel)
         campo_telefone.send_keys(Keys.ENTER)
         sleep(1)
-        campo_sexo = driver.find_element(By.ID, 'masc') if sexo == 'Masculino' else driver.find_element(By.ID, 'fem')
+        campo_sexo = driver.find_element(By.ID, 'masc') if sexo in ['m', 'M'] else driver.find_element(By.ID, 'fem')
         campo_sexo.click()
         sleep(1)
         campo_sexo.send_keys(Keys.ENTER)
