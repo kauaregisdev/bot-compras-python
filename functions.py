@@ -87,34 +87,10 @@ def get_cep(a):
     else:
         return False
 
-def get_senha(a, b):
-    from os import system
-
-    if a.lower() == 's':
-        system('cls')
-        a = True
-        print('Digite sua senha abaixo. Certifique-se de que a senha está correta, ou o bot não funcionará!')
-        b = input('')
-        if len(b) >= 6:
-            system('cls')
-            return a, b
-        else:
-            system('cls')
-            print('A senha deve ter pelo menos 6 caracteres.')         
-    elif a.lower() == 'n':
-        system('cls')
-        a = False
-        print('Você não possui uma conta. Você deverá criar uma senha para sua conta.')
-        print('Você deverá preencher alguns dados para prosseguir.' \
-        '\n''Você deve criar uma senha contendo pelo menos 6 caracteres para sua conta.')
-        b = input('Digite uma senha para sua conta: ')
-        if len(b) >= 6:
-            system('cls')
-            return a, b
-        else:
-            system('cls')
-            print('A senha deve ter pelo menos 6 caracteres.')
-    else:
+def get_senha(a):
+    if len(a) >= 6:
+        return a
+    else: 
         return False
 
 def get_nome(a):

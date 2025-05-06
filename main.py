@@ -6,12 +6,6 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support.ui import Select
 from os import system
 from time import sleep
-sabor = None
-senha = None
-nome = None
-email = None
-tel = None
-sexo = None
 
 # introduzindo o bot
 print('Bem-vindo ao bot de automação de compras!' \
@@ -24,10 +18,9 @@ print('Você tem direito a escolher os seguintes produtos:' \
 '\n''3 - Pré-treino Haze Hardcore 300g (104,90 à vista, 116,50 no cartão)' \
 '\n''4 - Pasta de amendoim integral 1kg (27,90 à vista, 31,00 no cartão)' \
 '\n''5 - Beta-alanina 250g (68,90 à vista, 76,50 no cartão)')
-sleep(20)
-system('cls')
 
 # recebendo o produto desejado
+sabor = None # variável para armazenar o sabor do whey ou do pré-treino
 while True:
     pesquisa = input('Digite o dígito correspondente ao produto que deseja comprar no site da Growth: ')
 
@@ -39,8 +32,7 @@ while True:
         '\n''3 - Morango' \
         '\n''4 - Cookies and Cream' \
         '\n''5 - Doce de leite')
-        sleep(15)
-        system('cls')
+
         sabores_whey = {
             '1': "//div[@class='attrSimples_valores']//span[text()=' Natural ']",
             '2': "//div[@class='attrSimples_valores']//span[text()=' Chocolate Milk Shake ']",
@@ -48,6 +40,7 @@ while True:
             '4': "//div[@class='attrSimples_valores']//span[text()=' Cookies and Cream ']",
             '5': "//div[@class='attrSimples_valores']//span[text()=' Doce de leite ']"
         }
+
         while True: # escolhendo o sabor do whey
             sabor = input('Digite o dígito correspondente ao sabor desejado: ')
             if sabor in sabores_whey:
@@ -66,9 +59,8 @@ while True:
         print('Ótima escolha! Você tem direito a escolher as seguintes opções:' \
         '\n''1 - Creatina normal (64,90 à vista, 72,00 no cartão)' \
         '\n''2 - Creatina Creapure (109,90 à vista, 122,00 no cartão)')
-        sleep(15)
-        system('cls')
         opcoes = ['1', '2']
+
         while True:
             pesquisa = input('Digite o dígito correspondente à opção desejada: ')
             if pesquisa in opcoes:
@@ -90,8 +82,6 @@ while True:
         '\n''4 - Uva' \
         '\n''5 - Açaí com Guaraná' \
         '\n''6 - Tutti-Fruti')
-        sleep(15)
-        system('cls')
 
         sabores_pre_treino = {
             '1': "//div[@class='attrSimples_valores']//span[text()=' Limão ']",
@@ -101,6 +91,7 @@ while True:
             '5': "//div[@class='attrSimples_valores']//span[text()=' Açaí com Guaraná ']",
             '6': "//div[@class='attrSimples_valores']//span[text()=' Tutti-Fruti ']"
         }
+
         while True:
             sabor = input('Digite o dígito correspondente ao sabor desejado: ')
             if sabor in sabores_pre_treino:
@@ -175,58 +166,86 @@ while True:
         id_residencia = 'Casa' if id_residencia in ['c', 'C'] else 'Apartamento'
         break
 
-# recebendo o login do usuário, caso tenha
+# recebendo o login e a senha do usuário, ou criando uma conta para o usuário
 while True:
     login = input('Você já possui uma conta no site da Growth? (s/n): ')
-    if not f.get_senha(login, senha): # chamando a função de validação de login
+
+    if login.lower() == 's':
+        system('cls')
+        login = True
+        while True: # recebendo a senha do usuário
+            print('Digite sua senha abaixo. Certifique-se de que a senha está correta, ou o bot não funcionará!')        
+            senha = input('')
+            if not f.get_senha(senha): # chamando a função de validação de senha
+                system('cls')
+                print('Senha inválida.')
+                continue
+            else:
+                system('cls')
+                break
+        break
+
+    elif login.lower() == 'n': # recebendo os dados do usuário pra criar uma conta
+        system('cls')
+        login = False
+        while True: # recebendo a senha do usuário   
+            print('Você deverá preencher alguns dados para prosseguir com a criação de sua conta.' \
+            '\n''Você deve criar uma senha contendo pelo menos 6 caracteres para sua conta.')
+            senha = input('Digite uma senha para sua conta: ')
+            if not f.get_senha(senha): # chamando a função de validação de senha
+                system('cls')
+                print('Senha inválida.')
+                continue
+            else:
+                system('cls')
+                break
+
+        while True: # recebendo o nome completo do usuário
+            nome = input('Digite o seu nome completo: ') 
+            if not f.get_nome(nome): # chamando a função de validação de nome
+                system('cls')
+                print('Nome inválido.')
+                continue
+            else:
+                system('cls')
+                break
+
+        while True:
+            email = input('Digite o seu e-mail: ')
+            if not f.get_nome(email): # chamando a função de validação de nome
+                system('cls')
+                print('E-mail inválido.')
+                continue
+            else:
+                system('cls')
+                break
+
+        while True:
+            print('Abaixo, digite o seu telefone (apenas números, com DDD e 9 na frente). Ex.: 85988888888 ')
+            tel = input('') 
+            if not f.get_telefone(tel): # chamando a função de validação de telefone
+                system('cls')
+                print('Telefone inválido.')
+                continue
+            else:
+                system('cls')
+                break
+
+        while True:
+            sexo = input('Digite o seu sexo, masculino ou feminino (m/f): ')
+            if not f.get_sexo(sexo): # chamando a função de validação de sexo
+                system('cls')
+                print('Sexo inválido.')
+                continue
+            else:
+                system('cls')
+                break
+        break
+
+    else:
         system('cls')
         print('Opção inválida.')
         continue
-    else:
-        system('cls')
-        break
-
-if not login:
-    while True: # recebendo o nome completo do usuário
-        nome = input('Digite o seu nome completo: ') 
-        if not f.get_nome(nome): # chamando a função de validação de nome
-            system('cls')
-            print('Nome inválido.')
-            continue
-        else:
-            system('cls')
-            break
-
-    while True:
-        email = input('Digite o seu e-mail: ')
-        if not f.get_nome(email): # chamando a função de validação de nome
-            system('cls')
-            print('E-mail inválido.')
-            continue
-        else:
-            system('cls')
-            break
-    
-    while True:
-        print('Abaixo, digite o seu telefone (apenas números, com DDD e 9 na frente). Ex.: 85988888888 ')
-        tel = input('') 
-        if not f.get_telefone(tel): # chamando a função de validação de telefone
-            system('cls')
-            print('Telefone inválido.')
-            continue
-        else:
-            system('cls')
-            break
-
-    while True:
-        sexo = input('Digite o seu sexo, masculino ou feminino (m/f): ')
-        if not f.get_sexo(sexo): # chamando a função de validação de sexo
-            system('cls')
-            print('Sexo inválido.')
-            continue
-        else:
-            system('cls')
-            break
 
 # escolhendo o cupom de desconto
 while True:
@@ -253,13 +272,13 @@ while True:
         '\n''1 - Cartão de crédito' \
         '\n''2 - Boleto à vista' \
         '\n''3 - Pix à vista')
+    
     metodos = {
         '1': 'main-Box-conteudo-formasPag-opcao-img iconCartaoCredito',
         '2': 'main-Box-conteudo-formasPag-opcao-img iconBoleto',
         '3': 'main-Box-conteudo-formasPag-opcao-img iconPix',
     }
-    sleep(10)
-    system('cls')
+
     metodo_pagamento = input('Digite o dígito correspondente à forma de pagamento desejada: ')
     if metodo_pagamento in metodos:
         system('cls')
@@ -390,16 +409,19 @@ try:
     sleep(5)
     
     # preenchendo os dados pessoais
-    campo_cpf = driver.find_element(By.CLASS_NAME, 'mainBox-conteudo-form-input-validacao') # localiza o campo de CPF
+    campo_cpf = driver.find_element(By.NAME, 'email') # localiza o campo de preenchimento com e-mail ou CPF (nesse caso usei CPF)
     campo_cpf.click() # clica no campo de CPF
     sleep(1)
-    driver.execute_script("arguments[0].value = arguments[1];", campo_cpf, cpf) # não está funcionando corretamente, ver depois
+    campo_cpf.send_keys(cpf) # digita o CPF
     sleep(1)
     campo_cpf.send_keys(Keys.ENTER) # pressiona enter para validar o CPF
     sleep(5)
 
     if login: # entrando na conta do usuário
-        ... # preencher os dados de login (incompleto, erro ao tentar achar a caixa de texto)
+        campo_senha = driver.find_element(By.NAME, 'senha') # localiza o campo de senha
+        campo_senha.send_keys(senha) # digita a senha
+        sleep(1)
+        campo_senha.send_keys(Keys.ENTER) # pressiona enter para validar a senha
         sleep(5)
 
     else: # criando uma conta para o usuário
