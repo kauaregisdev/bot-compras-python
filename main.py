@@ -3,6 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.support.ui import Select
 from os import system
 from time import sleep
 sabor = None
@@ -40,27 +41,18 @@ while True:
         '\n''5 - Doce de leite')
         sleep(15)
         system('cls')
+        sabores_whey = {
+            '1': "//div[@class='attrSimples_valores']//span[text()=' Natural ']",
+            '2': "//div[@class='attrSimples_valores']//span[text()=' Chocolate Milk Shake ']",
+            '3': "//div[@class='attrSimples_valores']//span[text()=' Morango ']",
+            '4': "//div[@class='attrSimples_valores']//span[text()=' Cookies and Cream ']",
+            '5': "//div[@class='attrSimples_valores']//span[text()=' Doce de leite ']"
+        }
         while True: # escolhendo o sabor do whey
             sabor = input('Digite o dígito correspondente ao sabor desejado: ')
-            if sabor == '1':
+            if sabor in sabores_whey:
                 system('cls')
-                sabor = "//div[@class='attrSimples_valores']//span[text()=' Natural ']"
-                break
-            elif sabor == '2':
-                system('cls')
-                sabor = "//div[@class='attrSimples_valores']//span[text()=' Chocolate Milk Shake ']"
-                break
-            elif sabor == '3':
-                system('cls')
-                sabor = "//div[@class='attrSimples_valores']//span[text()=' Morango ']"
-                break
-            elif sabor == '4':
-                system('cls')
-                sabor = "//div[@class='attrSimples_valores']//span[text()=' Cookies and Cream ']"
-                break
-            elif sabor == '5':
-                system('cls')
-                sabor = "//div[@class='attrSimples_valores']//span[text()=' Doce de leite ']"
+                sabor = sabores_whey[sabor] # atribui o valor do dicionário ao sabor
                 break
             else:
                 system('cls')
@@ -76,15 +68,12 @@ while True:
         '\n''2 - Creatina Creapure (109,90 à vista, 122,00 no cartão)')
         sleep(15)
         system('cls')
+        opcoes = ['1', '2']
         while True:
             pesquisa = input('Digite o dígito correspondente à opção desejada: ')
-            if pesquisa == '1':
+            if pesquisa in opcoes:
                 system('cls')
-                pesquisa = 'creatina monohidratada 250g'
-                break
-            elif pesquisa == '2':
-                system('cls')
-                pesquisa = 'creatina creapure 250g'
+                pesquisa = 'creatina monohidratada 250g' if pesquisa == '1' else 'creatina creapure 250g'
                 break
             else:
                 system('cls')
@@ -103,31 +92,20 @@ while True:
         '\n''6 - Tutti-Fruti')
         sleep(15)
         system('cls')
+
+        sabores_pre_treino = {
+            '1': "//div[@class='attrSimples_valores']//span[text()=' Limão ']",
+            '2': "//div[@class='attrSimples_valores']//span[text()=' Laranja ']",
+            '3': "//div[@class='attrSimples_valores']//span[text()=' Melancia ']",
+            '4': "//div[@class='attrSimples_valores']//span[text()=' Uva ']",
+            '5': "//div[@class='attrSimples_valores']//span[text()=' Açaí com Guaraná ']",
+            '6': "//div[@class='attrSimples_valores']//span[text()=' Tutti-Fruti ']"
+        }
         while True:
             sabor = input('Digite o dígito correspondente ao sabor desejado: ')
-            if sabor == '1':
+            if sabor in sabores_pre_treino:
                 system('cls')
-                sabor = "//div[@class='attrSimples_valores']//span[text()=' Limão ']"
-                break
-            elif sabor == '2':
-                system('cls')
-                sabor = "//div[@class='attrSimples_valores']//span[text()=' Laranja ']"
-                break
-            elif sabor == '3':
-                system('cls')
-                sabor = "//div[@class='attrSimples_valores']//span[text()=' Melancia ']"
-                break
-            elif sabor == '4':
-                system('cls')
-                sabor = "//div[@class='attrSimples_valores']//span[text()=' Uva ']"
-                break
-            elif sabor == '5':
-                system('cls')
-                sabor = "//div[@class='attrSimples_valores']//span[text()=' Açaí com Guaraná ']"
-                break
-            elif sabor == '6':
-                system('cls')
-                sabor = "//div[@class='attrSimples_valores']//span[text()=' Tutti-Fruti ']"
+                sabor = sabores_pre_treino[sabor] # atribui o valor do dicionário ao sabor
                 break
             else:
                 system('cls')
@@ -175,6 +153,28 @@ while True:
         cep = cep[:5]+'-'+cep[5:] # inserindo o hífen no meio do CEP
         break
 
+# recebendo o endereço completo do usuário
+while True:
+    num_residencia = input('Digite o número da sua residência: ')
+    if not num_residencia.isdigit(): # verificando se o número da casa é um número
+        system('cls')
+        print('Número inválido.')
+        continue
+    else:
+        system('cls')
+        break
+
+while True:
+    id_residencia = input('Você mora em casa ou apartamento? (c/a): ')
+    if id_residencia not in ['c', 'C', 'a', 'A']: # verificando se o usuário digitou c ou a
+        system('cls')
+        print('Opção inválida.')
+        continue
+    else:
+        system('cls')
+        id_residencia = 'Casa' if id_residencia in ['c', 'C'] else 'Apartamento'
+        break
+
 # recebendo o login do usuário, caso tenha
 while True:
     login = input('Você já possui uma conta no site da Growth? (s/n): ')
@@ -220,8 +220,13 @@ if not login:
 
     while True:
         sexo = input('Digite o seu sexo, masculino ou feminino (m/f): ')
-        if not f.get_sexo(sexo):
-            ... # chamando a função de validação de sexo
+        if not f.get_sexo(sexo): # chamando a função de validação de sexo
+            system('cls')
+            print('Sexo inválido.')
+            continue
+        else:
+            system('cls')
+            break
 
 # escolhendo o cupom de desconto
 while True:
@@ -241,6 +246,77 @@ while True:
         system('cls')
         print('Opção inválida.')
         continue
+
+# escolhendo a forma de pagamento
+while True:
+    print('Você tem direito a escolher as seguintes formas de pagamento:' \
+        '\n''1 - Cartão de crédito' \
+        '\n''2 - Boleto à vista' \
+        '\n''3 - Pix à vista')
+    metodos = {
+        '1': 'main-Box-conteudo-formasPag-opcao-img iconCartaoCredito',
+        '2': 'main-Box-conteudo-formasPag-opcao-img iconBoleto',
+        '3': 'main-Box-conteudo-formasPag-opcao-img iconPix',
+    }
+    sleep(10)
+    system('cls')
+    metodo_pagamento = input('Digite o dígito correspondente à forma de pagamento desejada: ')
+    if metodo_pagamento in metodos:
+        system('cls')
+        digito_escolhido = metodo_pagamento
+        metodo_pagamento = metodos[metodo_pagamento] # atribui o valor do dicionário ao método de pagamento
+
+        if digito_escolhido == '1': # se o usuário escolheu cartão de crédito
+            while True:
+                num_cartao = input('Digite o número do cartão de crédito (apenas números): ')
+                if not num_cartao.isdigit() or len(num_cartao) != 16: # verificando se o número do cartão é um número
+                    system('cls')
+                    print('Número inválido.')
+                    continue
+
+                nome_cartao = input('Digite o nome do titular, como está no cartão: ')
+                if not ' ' in nome_cartao:
+                    system('cls')
+                    print('Nome inválido.')
+                    continue
+
+                validade = input('Digite a validade do cartão (MM/AAAA): ')
+                if not len(validade) == 7 or validade[2] != '/':
+                    system('cls')
+                    print('Validade inválida.')
+                    continue
+
+                mes, ano = validade.split('/')
+                if mes not in ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']:
+                    system('cls')
+                    print('Mês inválido.')
+                    continue
+                if int(ano) < 2026 or int(ano) > 2040:
+                    system('cls')
+                    print('Ano inválido.')
+                    continue
+
+                cod_seg = input('Digite o código de segurança do cartão (apenas números): ')
+                if not cod_seg.isdigit() or len(cod_seg) != 3: # verificando se o código de segurança é um número
+                    system('cls')
+                    print('Código inválido.')
+                    continue
+
+                parcelas = input('Quantas parcelas você deseja? (1 a 6): ')
+                if not parcelas.isdigit() or int(parcelas) < 1 or int(parcelas) > 6:
+                    system('cls')
+                    print('Número de parcelas inválido.')
+                    continue
+                else:
+                    system('cls')
+                    break
+        break
+
+    else:
+        system('cls')
+        print('Método de pagamento inválido.')
+        continue
+    
    
 print('Aguarde enquanto o bot faz a compra...')
 
@@ -275,6 +351,7 @@ try:
         lista_sabores = driver.find_element(By.ID, 'attrSimples') # localiza o botão de sabor
         lista_sabores.click()
         sleep(1)
+
         botao_escolher_sabor = driver.find_element(By.XPATH, sabor) # localiza o botão de sabor desejado (erro no XPATH)
         botao_escolher_sabor.click()
         sleep(1)
@@ -283,6 +360,7 @@ try:
     botao_add_carrinho = driver.find_element(By.ID, 'btComprar') # localiza o botão de adicionar ao carrinho
     driver.execute_script("arguments[0].click();", botao_add_carrinho) # usa JavaScript para clicar no botão
     sleep(1)
+
     botao_ir_carrinho = driver.find_element(By.ID, 'externo-carrinhoLateral-carrinho') # localiza o botão para ir para o carrinho
     botao_ir_carrinho.click()
     sleep(1)
@@ -331,23 +409,27 @@ try:
         campo_nome.send_keys(nome)
         campo_nome.send_keys(Keys.ENTER)
         sleep(1)
+
         campo_email = driver.find_element(By.ID, 'email-cadastro')
         campo_email.click()
         sleep(1)
         campo_email.send_keys(email)
         campo_email.send_keys(Keys.ENTER)
         sleep(1)
+
         campo_telefone = driver.find_element(By.ID, 'celular-cadastro')
         campo_telefone.click()
         sleep(1)
         campo_telefone.send_keys(tel)
         campo_telefone.send_keys(Keys.ENTER)
         sleep(1)
+
         campo_sexo = driver.find_element(By.ID, 'masc') if sexo in ['m', 'M'] else driver.find_element(By.ID, 'fem')
         campo_sexo.click()
         sleep(1)
         campo_sexo.send_keys(Keys.ENTER)
         sleep(1)
+
         campo_senha = driver.find_element(By.ID, 'senha-cadastro')
         campo_senha.click()
         sleep(1)
@@ -355,7 +437,77 @@ try:
         campo_senha.send_keys(Keys.ENTER)
         sleep(5)
 
-    # preenchendo os dados de pagamento (incompleto)
+    # preenchendo os dados de endereço
+    campo_num_casa = driver.find_element(By.NAME, 'numeroRapido') # localiza o campo de número da casa
+    campo_num_casa.send_keys(num_residencia)
+    sleep(1)
+
+    campo_id_casa = driver.find_element(By.NAME, 'nomeRapido') # localiza o campo de nome da casa
+    campo_id_casa.click() # clica no campo de nome da casa
+    sleep(1)
+    campo_id_casa.send_keys(id_residencia) # digita o nome da casa
+    sleep(1)
+
+    botao_cadastrar_endereco = driver.find_element(By.NAME, 'btnEnviar') # localiza o botão de cadastrar endereço
+    botao_cadastrar_endereco.click() # clica no botão de cadastrar endereço
+    sleep(1)
+
+    botao_ir_pagamento = driver.find_element(By.ID, 'btnEnderecoIrPagamento') # localiza o botão de ir para a aba de pagamento
+    botao_ir_pagamento.click() # clica no botão de ir para a aba de pagamento
+    sleep(5)
+
+    # preenchendo os dados de pagamento
+    botao_metodo = driver.find_element(By.CLASS_NAME, metodo_pagamento) # localiza o botão do método escolhido
+    botao_metodo.click()
+
+    if digito_escolhido == '1': # se o usuário escolheu cartão de crédito        
+        campo_num_cartao = driver.find_element(By.ID, 'cardNumber') # localiza o campo de número do cartão
+        campo_num_cartao.click()
+        sleep(1)
+        campo_num_cartao.send_keys(num_cartao)
+        sleep(1)
+
+        campo_nome_cartao = driver.find_element(By.ID, 'cardholderName') # localiza o campo de nome do titular
+        campo_nome_cartao.click()
+        sleep(1)
+        campo_nome_cartao.send_keys(nome_cartao)
+        sleep(1)
+
+        campo_cpf_cartao = driver.find_element(By.ID, 'docNumber') # localiza o campo de CPF do titular
+        campo_cpf_cartao.click()
+        sleep(1)
+        campo_cpf_cartao.send_keys(cpf)
+        sleep(1)
+
+        campo_select_mes = driver.find_element(By.ID, 'cardExpirationMonth')
+        campo_select_mes.click()
+        sleep(1)
+        campo_mes_val = Select(campo_select_mes)
+        campo_mes_val.select_by_value(mes) # seleciona o mês de validade do cartão
+        sleep(1)
+
+        campo_select_ano = driver.find_element(By.ID, 'cardExpirationYear')
+        campo_select_ano.click()
+        sleep(1)
+        campo_ano_val = Select(campo_select_ano)
+        campo_ano_val.select_by_value(ano) # seleciona o ano de validade do cartão
+        sleep(1)
+
+        campo_cod_seg = driver.find_element(By.ID, 'securityCode') # localiza o campo de código de segurança
+        campo_cod_seg.click()
+        sleep(1)
+        campo_cod_seg.send_keys(cod_seg)
+        sleep(1)
+
+        campo_parcelas = driver.find_element(By.ID, 'parcelasCartaoMercadoPago') # localiza o campo de parcelas
+        campo_parcelas.click()
+        sleep(1)
+
+        campo_select_parcelas = Select(campo_parcelas)
+        campo_select_parcelas.select_by_value(parcelas) # seleciona o número de parcelas
+        sleep(1)
+
+    botao_finalizar_compra = driver.find_element(By.ID, 'finalizarPedido') # localiza o botão de finalizar compra
 
 finally:
     # fechando o navegador
