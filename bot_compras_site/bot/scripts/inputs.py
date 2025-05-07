@@ -1,3 +1,5 @@
+
+
 def gen_cpf():
     from random import randint
     cpf_input = ''
@@ -81,7 +83,7 @@ def check_cpf(a):
             return False
 
 def check_cep(a):
-    return True if len(a) == 8 and a.isdigit() else False
+    return a if len(a) == 8 and a.isdigit() else False
 
 def check_senha(a):
     return a if len(a) >= 6 else False
@@ -93,7 +95,7 @@ def check_email(a):
     from email_validator import validate_email, EmailNotValidError
     try:
         validate_email(a)
-        return True
+        return a
     except EmailNotValidError as e:
         return False
     
@@ -101,4 +103,4 @@ def check_telefone(a):
     return False if not a.isnumeric() or len(a) != 11 else a
 
 def check_sexo(a):
-        return a if a in ['m', 'M', 'f', 'F'] else False
+    return a if a in ['m', 'M', 'f', 'F'] else False
