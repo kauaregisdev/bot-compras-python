@@ -4,6 +4,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support.ui import Select
+from pyautogui import press
 from os import system
 from time import sleep
 
@@ -123,47 +124,13 @@ while True:
 # recebendo o CPF do usuário
 while True:
     cpf = input('Digite o seu CPF (apenas números): ')
-    f.get_cpf(cpf) # chamando a função de validação de CPF
-    if not f.get_cpf(cpf):
+    f.check_cpf(cpf) # chamando a função de validação de CPF
+    if not f.check_cpf(cpf):
         system('cls')
         print('CPF inválido.')
         continue
     else:
         system('cls')
-        break
-
-# recebendo o CEP do usuário
-while True:
-    cep = input('Digite o seu CEP: ')
-    if not f.get_cep(cep): # chamando a função de validação de CEP
-        system('cls')
-        print('CEP inválido.')
-        continue
-    else:
-        system('cls')
-        cep = cep[:5]+'-'+cep[5:] # inserindo o hífen no meio do CEP
-        break
-
-# recebendo o endereço completo do usuário
-while True:
-    num_residencia = input('Digite o número da sua residência: ')
-    if not num_residencia.isdigit(): # verificando se o número da casa é um número
-        system('cls')
-        print('Número inválido.')
-        continue
-    else:
-        system('cls')
-        break
-
-while True:
-    id_residencia = input('Você mora em casa ou apartamento? (c/a): ')
-    if id_residencia not in ['c', 'C', 'a', 'A']: # verificando se o usuário digitou c ou a
-        system('cls')
-        print('Opção inválida.')
-        continue
-    else:
-        system('cls')
-        id_residencia = 'Casa' if id_residencia in ['c', 'C'] else 'Apartamento'
         break
 
 # recebendo o login e a senha do usuário, ou criando uma conta para o usuário
@@ -176,12 +143,25 @@ while True:
         while True: # recebendo a senha do usuário
             print('Digite sua senha abaixo. Certifique-se de que a senha está correta, ou o bot não funcionará!')        
             senha = input('')
-            if not f.get_senha(senha): # chamando a função de validação de senha
+            if not f.check_senha(senha): # chamando a função de validação de senha
                 system('cls')
                 print('Senha inválida.')
                 continue
             else:
                 system('cls')
+                break
+
+        while True:
+            endereco = input('Você já possui endereço cadastrado? (s/n): ')
+            opcoes = ['s', 'S', 'n', 'N']
+            if not endereco in opcoes:
+                system('cls')
+                print('Opção inválida.')
+                continue
+            else:
+                system('cls')
+                escolha = endereco
+                endereco = True if escolha in ['s', 'S'] else False
                 break
         break
 
@@ -192,7 +172,7 @@ while True:
             print('Você deverá preencher alguns dados para prosseguir com a criação de sua conta.' \
             '\n''Você deve criar uma senha contendo pelo menos 6 caracteres para sua conta.')
             senha = input('Digite uma senha para sua conta: ')
-            if not f.get_senha(senha): # chamando a função de validação de senha
+            if not f.check_senha(senha): # chamando a função de validação de senha
                 system('cls')
                 print('Senha inválida.')
                 continue
@@ -202,7 +182,7 @@ while True:
 
         while True: # recebendo o nome completo do usuário
             nome = input('Digite o seu nome completo: ') 
-            if not f.get_nome(nome): # chamando a função de validação de nome
+            if not f.check_nome(nome): # chamando a função de validação de nome
                 system('cls')
                 print('Nome inválido.')
                 continue
@@ -212,7 +192,7 @@ while True:
 
         while True:
             email = input('Digite o seu e-mail: ')
-            if not f.get_nome(email): # chamando a função de validação de nome
+            if not f.check_nome(email): # chamando a função de validação de nome
                 system('cls')
                 print('E-mail inválido.')
                 continue
@@ -223,7 +203,7 @@ while True:
         while True:
             print('Abaixo, digite o seu telefone (apenas números, com DDD e 9 na frente). Ex.: 85988888888 ')
             tel = input('') 
-            if not f.get_telefone(tel): # chamando a função de validação de telefone
+            if not f.check_telefone(tel): # chamando a função de validação de telefone
                 system('cls')
                 print('Telefone inválido.')
                 continue
@@ -233,7 +213,7 @@ while True:
 
         while True:
             sexo = input('Digite o seu sexo, masculino ou feminino (m/f): ')
-            if not f.get_sexo(sexo): # chamando a função de validação de sexo
+            if not f.check_sexo(sexo): # chamando a função de validação de sexo
                 system('cls')
                 print('Sexo inválido.')
                 continue
@@ -246,6 +226,43 @@ while True:
         system('cls')
         print('Opção inválida.')
         continue
+
+# recebendo o CEP do usuário
+while True:
+    cep = input('Digite o seu CEP: ')
+    if not f.check_cep(cep): # chamando a função de validação de CEP
+        system('cls')
+        print('CEP inválido.')
+        continue
+    else:
+        system('cls')
+        cep = cep[:5]+'-'+cep[5:] # inserindo o hífen no meio do CEP
+        break
+
+# recebendo o número da residência do usuário, caso necessário
+if not endereco:
+    while True:
+        num_residencia = input('Digite o número da sua residência: ')
+        if not num_residencia.isdigit(): # verificando se o número da casa é um número
+            system('cls')
+            print('Número inválido.')
+            continue
+        else:
+            system('cls')
+            break
+
+'''
+while True:
+    id_residencia = input('Você mora em casa ou apartamento? (c/a): ')
+    if id_residencia not in ['c', 'C', 'a', 'A']: # verificando se o usuário digitou c ou a
+        system('cls')
+        print('Opção inválida.')
+        continue
+    else:
+        system('cls')
+        id_residencia = 'Casa' if id_residencia in ['c', 'C'] else 'Apartamento'
+        break
+'''
 
 # escolhendo o cupom de desconto
 while True:
@@ -274,9 +291,9 @@ while True:
         '\n''3 - Pix à vista')
     
     metodos = {
-        '1': 'main-Box-conteudo-formasPag-opcao-img iconCartaoCredito',
-        '2': 'main-Box-conteudo-formasPag-opcao-img iconBoleto',
-        '3': 'main-Box-conteudo-formasPag-opcao-img iconPix',
+        '1': '//div[@data-tipo-pag="cartao"]',
+        '2': '//div[@data-tipo-pag="boleto"]',
+        '3': '//div[@data-tipo-pag="pix"]',
     }
 
     metodo_pagamento = input('Digite o dígito correspondente à forma de pagamento desejada: ')
@@ -293,8 +310,8 @@ while True:
                     print('Número inválido.')
                     continue
 
-                nome_cartao = input('Digite o nome do titular, como está no cartão: ')
-                if not ' ' in nome_cartao:
+                nome_titular = input('Digite o nome do titular, como está no cartão: ')
+                if not ' ' in nome_titular:
                     system('cls')
                     print('Nome inválido.')
                     continue
@@ -339,18 +356,15 @@ while True:
    
 print('Aguarde enquanto o bot faz a compra...')
 
-# caminho para o chrome e o chromedriver
-chrome_path = r"C:\Users\kauar\Downloads\chrome-win64\chrome-win64\chrome.exe"  # caminho correto do chrome
-driver_path = r"C:\Users\kauar\Downloads\chromedriver-win64\chromedriver-win64\chromedriver.exe"  # caminho correto do chromedriver
-options = webdriver.ChromeOptions()
-options.binary_location = chrome_path # local do chrome
-service = Service(driver_path)
-driver = webdriver.Chrome(service=service, options=options) # verifica se o caminho do ChromeDriver está correto
+# configurando o webdriver
+driver_path = r"C:\Users\kauar\Downloads\chromedriver-win64\chromedriver-win64\chromedriver.exe" # caminho do chromedriver 
+driver = webdriver.Chrome(service=Service(driver_path), options=webdriver.ChromeOptions()) # criando o objeto do webdriver
 
 try:
     # abrindo um site no chromium
     driver.get('https://gsuplementos.com.br') # abre o site da Growth
-    sleep(5) # espera 5 segundos
+    driver.maximize_window() # maximiza a janela do navegador
+    sleep(5) # espera 5 segundos para carregar a página
 
     # localizando a barra de pesquisa
     search_bar = driver.find_element(By.ID, 'busca-principal-topo') # localizar barra de pesquisa
@@ -364,7 +378,7 @@ try:
     # localizando e escolhendo o produto
     produto = driver.find_element(By.CLASS_NAME, 'cardProd-topo') # encontra o produto pesquisado
     produto.click()
-    sleep(5) # espera 10 segundos para carregar a página do produto
+    sleep(10) # espera 10 segundos para carregar a página do produto
 
     if sabor: # escolhendo o sabor do produto, caso necessário
         lista_sabores = driver.find_element(By.ID, 'attrSimples') # localiza o botão de sabor
@@ -390,8 +404,6 @@ try:
     sleep(1)
     botao_cep.send_keys(cep) # digita o CEP
     sleep(1)
-    botao_cep.send_keys(Keys.ENTER) # pressiona enter para buscar o CEP
-    sleep(3) # esperando o frete ser calculado
 
     # preenchendo o cupom de desconto, se houver
     if cupom:
@@ -400,8 +412,9 @@ try:
         sleep(1)
         botao_cupom.send_keys(cupom) # digita o cupom
         sleep(1)
-        botao_cupom.send_keys(Keys.ENTER) # pressiona enter para aplicar o cupom
-        sleep(3) # esperando o cupom ser aplicado
+    
+    press('enter') # pressiona enter para aplicar o CEP e, se houver, o cupom
+    sleep(5) # esperando o cupom ser aplicado
     
     # indo pra página de finalização de compra
     botao_finalizar = driver.find_element(By.CLASS_NAME, 'resumoPedidoBotoes-finalizar') # localiza o botão de fechar pedido
@@ -422,7 +435,7 @@ try:
         campo_senha.send_keys(senha) # digita a senha
         sleep(1)
         campo_senha.send_keys(Keys.ENTER) # pressiona enter para validar a senha
-        sleep(5)
+        sleep(10)
 
     else: # criando uma conta para o usuário
         campo_nome = driver.find_element(By.ID, 'nome-cadastro')
@@ -457,30 +470,26 @@ try:
         sleep(1)
         campo_senha.send_keys(senha)
         campo_senha.send_keys(Keys.ENTER)
-        sleep(5)
+        sleep(10)
 
-    # preenchendo os dados de endereço
-    campo_num_casa = driver.find_element(By.NAME, 'numeroRapido') # localiza o campo de número da casa
-    campo_num_casa.send_keys(num_residencia)
-    sleep(1)
-
-    campo_id_casa = driver.find_element(By.NAME, 'nomeRapido') # localiza o campo de nome da casa
-    campo_id_casa.click() # clica no campo de nome da casa
-    sleep(1)
-    campo_id_casa.send_keys(id_residencia) # digita o nome da casa
-    sleep(1)
-
-    botao_cadastrar_endereco = driver.find_element(By.NAME, 'btnEnviar') # localiza o botão de cadastrar endereço
-    botao_cadastrar_endereco.click() # clica no botão de cadastrar endereço
-    sleep(1)
+    # preenchendo os dados de endereço, caso necessário
+    if endereco:
+        campo_num_casa = driver.find_element(By.NAME, 'numeroRapido') # localiza o campo de número da casa
+        driver.execute_script("arguments[0].click();", campo_num_casa) # clica no campo de número da casa
+        sleep(1)
+        campo_num_casa.send_keys(num_residencia)
+        sleep(1)
+        botao_cadastrar_endereco = driver.find_element(By.NAME, 'btnEnviar') # localiza o botão de cadastrar endereço
+        botao_cadastrar_endereco.click() # clica no botão de cadastrar endereço
+        sleep(1)
 
     botao_ir_pagamento = driver.find_element(By.ID, 'btnEnderecoIrPagamento') # localiza o botão de ir para a aba de pagamento
     botao_ir_pagamento.click() # clica no botão de ir para a aba de pagamento
     sleep(5)
 
     # preenchendo os dados de pagamento
-    botao_metodo = driver.find_element(By.CLASS_NAME, metodo_pagamento) # localiza o botão do método escolhido
-    botao_metodo.click()
+    botao_metodo = driver.find_element(By.XPATH, metodo_pagamento) # localiza o botão do método escolhido
+    botao_metodo.click() # clica no botão do método escolhido
 
     if digito_escolhido == '1': # se o usuário escolheu cartão de crédito        
         campo_num_cartao = driver.find_element(By.ID, 'cardNumber') # localiza o campo de número do cartão
@@ -492,7 +501,7 @@ try:
         campo_nome_cartao = driver.find_element(By.ID, 'cardholderName') # localiza o campo de nome do titular
         campo_nome_cartao.click()
         sleep(1)
-        campo_nome_cartao.send_keys(nome_cartao)
+        campo_nome_cartao.send_keys(nome_titular)
         sleep(1)
 
         campo_cpf_cartao = driver.find_element(By.ID, 'docNumber') # localiza o campo de CPF do titular
@@ -527,8 +536,8 @@ try:
 
         campo_select_parcelas = Select(campo_parcelas)
         campo_select_parcelas.select_by_value(parcelas) # seleciona o número de parcelas
-        sleep(1)
 
+    sleep(5)
     botao_finalizar_compra = driver.find_element(By.ID, 'finalizarPedido') # localiza o botão de finalizar compra
 
 finally:

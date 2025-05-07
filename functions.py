@@ -31,7 +31,7 @@ def gen_cpf():
 
     print(f'O CPF gerado é {cpf_input}.')
 
-def get_cpf(a):
+def check_cpf(a):
     from os import system
     soma_cpf = 0
     multi = 10
@@ -80,34 +80,34 @@ def get_cpf(a):
         else:
             return False
 
-def get_cep(a):
+def check_cep(a):
     if len(a) == 8 and a.isdigit():
         # Inserindo um hífen no meio do CEP
         return True
     else:
         return False
 
-def get_senha(a):
+def check_senha(a):
     if len(a) >= 6:
         return a
     else: 
         return False
 
-def get_nome(a):
+def check_nome(a):
     if not ' ' in a:
         return False
     else:
         return a
 
-def get_email(a):
+def check_email(a):
     from email_validator import validate_email, EmailNotValidError
     try:
         validate_email(a)
-        return a
+        return True
     except EmailNotValidError as e:
         return False
     
-def get_telefone(a):
+def check_telefone(a):
     if not a.isnumeric():
         return False
     if len(a) != 11:
@@ -115,7 +115,7 @@ def get_telefone(a):
     else:
         return a
 
-def get_sexo(a):
+def check_sexo(a):
     if a in ['m', 'M', 'f', 'F']:
         return a
     else:
