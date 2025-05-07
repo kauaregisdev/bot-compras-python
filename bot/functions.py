@@ -81,23 +81,13 @@ def check_cpf(a):
             return False
 
 def check_cep(a):
-    if len(a) == 8 and a.isdigit():
-        # Inserindo um hífen no meio do CEP
-        return True
-    else:
-        return False
+    return True if len(a) == 8 and a.isdigit() else False
 
 def check_senha(a):
-    if len(a) >= 6:
-        return a
-    else: 
-        return False
+    return a if len(a) >= 6 else False
 
 def check_nome(a):
-    if not ' ' in a:
-        return False
-    else:
-        return a
+    return False if not ' ' in a else a
 
 def check_email(a):
     from email_validator import validate_email, EmailNotValidError
@@ -108,15 +98,7 @@ def check_email(a):
         return False
     
 def check_telefone(a):
-    if not a.isnumeric():
-        return False
-    if len(a) != 11:
-        return False
-    else:
-        return a
+    return False if not a.isnumeric() or len(a) != 11 else a
 
 def check_sexo(a):
-    if a in ['m', 'M', 'f', 'F']:
-        return a
-    else:
-        return False
+        return a if a in ['m', 'M', 'f', 'F'] else False

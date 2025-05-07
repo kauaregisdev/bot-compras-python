@@ -1,1 +1,5 @@
-__pycache__/functions.cpython-311.pyc
+# ignora a pasta do ambiente virtual
+venv/
+
+# ignora a pasta de cache do Python
+__pycache__/

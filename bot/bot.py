@@ -21,7 +21,6 @@ print('Você tem direito a escolher os seguintes produtos:' \
 '\n''5 - Beta-alanina 250g (68,90 à vista, 76,50 no cartão)')
 
 # recebendo o produto desejado
-sabor = None # variável para armazenar o sabor do whey ou do pré-treino
 while True:
     pesquisa = input('Digite o dígito correspondente ao produto que deseja comprar no site da Growth: ')
 
@@ -360,6 +359,7 @@ print('Aguarde enquanto o bot faz a compra...')
 driver_path = r"C:\Users\kauar\Downloads\chromedriver-win64\chromedriver-win64\chromedriver.exe" # caminho do chromedriver 
 driver = webdriver.Chrome(service=Service(driver_path), options=webdriver.ChromeOptions()) # criando o objeto do webdriver
 
+# iniciando o bot
 try:
     # abrindo um site no chromium
     driver.get('https://gsuplementos.com.br') # abre o site da Growth

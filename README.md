@@ -7,4 +7,6 @@ O código está praticamente pronto, exceto por esse problema nos sabores e na c
 Arquivos necessários para usar o código
 Chromedriver: https://storage.googleapis.com/chrome-for-testing-public/136.0.7103.49/win64/chromedriver-win64.zip
 
+Para baixar as dependências necessárias: pip install -r requirements.txt
+
 Espero que goste!
