@@ -1,4 +1,4 @@
-# introduzindo o bot
+# código com funções de coleta de informações do usuário
 def exibir_boas_vindas():
     print('Bem-vindo ao bot de automação de compras!' \
     '\n''Esse bot foi desenvolvido especificamente para automatizar o processo de compras no site da Growth.')
