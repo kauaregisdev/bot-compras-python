@@ -16,17 +16,22 @@ Chromedriver: https://storage.googleapis.com/chrome-for-testing-public/136.0.710
 Para baixar as dependências necessárias: pip install -r requirements.txt
 
 Como executar o código:
-1. clone o repositório, executando no terminal o seguinte código:
+1. clone o repositório, executando no terminal os seguintes comandos:
 git clone https://github.com/kauaregisdev/bot-compras-python.git
 cd bot-compras-python
 
-2. instale as dependências pelo terminal, com o comando:
+2. crie e ative o ambiente virtual, com os comandos:
+python -m venv venv
+venv\Scripts\activate
+OBSERVAÇÃO: caso haja uma pasta venv/ nos arquivos do projeto, delete-a antes de criar um novo ambiente virtual!
+
+3. instale as dependências pelo terminal, com o comando:
 pip install -r requirements.txt
 
-3. baixe e configure o chromedriver, cujo link está acima neste texto
+4. baixe e configure o chromedriver, cujo link está acima neste texto
 você deve colocá-lo no mesmo diretório do script (bot/scripts)
 
-4. execute o bot no terminal, com o comando:
+5. execute o bot no terminal, com o comando:
 python script.py
 
 AVISO: A execução em Django não está funcionando ainda!
