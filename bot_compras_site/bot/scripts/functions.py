@@ -1,3 +1,4 @@
+# a função de checagem de e-mails não está funcionando
 def gen_cpf():
     from random import randint
     cpf_input = ''

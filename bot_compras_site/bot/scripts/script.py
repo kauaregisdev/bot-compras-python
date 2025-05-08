@@ -1,5 +1,6 @@
-def executar_bot(): # código desorganizado por enquanto, logo vou reorganizá-lo por arquivos, cada um contendo uma função que será desempenhada num arquivo main.py
-    from . import functions as f
+# este código sofrerá mudanças em breve, para melhoria da compreensão do sistema como um todo
+def executar_bot():
+    import functions as f
     from selenium import webdriver
     from selenium.webdriver.common.by import By
     from selenium.webdriver.common.keys import Keys
@@ -357,7 +358,7 @@ def executar_bot(): # código desorganizado por enquanto, logo vou reorganizá-l
     print('Aguarde enquanto o bot faz a compra...')
 
     # configurando o webdriver
-    driver_path = r"C:\bot\scripts\chromedriver.exe" # caminho do chromedriver
+    driver_path = r"C:\Users\kauar\OneDrive\Documentos\GitHub\bot-compras-python\bot_compras_site\bot\scripts\chromedriver.exe" # caminho do chromedriver
     driver = webdriver.Chrome(service=Service(driver_path), options=webdriver.ChromeOptions()) # criando o objeto do webdriver
 
     # iniciando o bot
@@ -544,3 +545,5 @@ def executar_bot(): # código desorganizado por enquanto, logo vou reorganizá-l
     finally:
         # fechando o navegador
         driver.quit()
+
+executar_bot()
