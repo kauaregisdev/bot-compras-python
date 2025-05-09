@@ -85,6 +85,9 @@ def receber_num_cartao():
 def receber_nome_titular():
     return input('Digite o nome do titular, como está no cartão: ')
 
+def receber_cpf_titular():
+    return input('Digite o CPF do titular do cartão: ')
+
 def receber_validade_cartao():
     return input('Digite a validade do cartão (MM/AAAA): ')
 

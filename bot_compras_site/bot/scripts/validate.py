@@ -22,7 +22,7 @@ def validar_sabor_whey(valor):
         '5': "//div[@class='attrSimples_valores']//span[text()=' Doce de leite ']"
     }   
     if valor in sabores_whey:
-        sabor = sabores_whey[sabor]
+        sabor = sabores_whey[valor]
         return sabor
     else:
         return False
@@ -45,7 +45,7 @@ def validar_sabor_pretreino(valor):
         '6': "//div[@class='attrSimples_valores']//span[text()=' Tutti-Fruti ']"
     }           
     if valor in sabores_pre_treino:
-        sabor = sabores_pre_treino[sabor]
+        sabor = sabores_pre_treino[valor]
         return sabor
     else:
         return False
@@ -100,11 +100,11 @@ def check_cpf(cpf_input):
 def check_cep(valor):
     return valor if len(valor) == 8 and valor.isdigit() else False
 
-def check_senha(valor):
-    return valor if len(valor) >= 6 else False
-
 def possui_conta(valor):
     return valor if valor in ['s', 'S', 'n', 'N'] else False
+
+def check_senha(valor):
+    return valor if len(valor) >= 6 else False
 
 def check_nome(valor):
     return valor if ' ' in valor else False
@@ -145,21 +145,18 @@ def validar_metodo_pag(valor):
         '3': '//div[@data-tipo-pag="pix"]',
     }
     if valor in metodos:
-        valor = metodos[valor]
-        return valor
+        metodo = metodos[valor]
+        return metodo
     else:
         return False
 
 def validar_num_cartao(valor):
     return False if not valor.isdigit() or len(valor) != 16 else valor
 
-def validar_nome_titular(valor):               
-    return False if not ' ' in valor else valor
-
 def validar_validade(valor):
     return False if not len(valor) == 7 or valor[2] != '/' else valor
 
-def validar_mes_validade(valor):
+def validar_mes_ano(valor):
     meses = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
     mes, ano = valor.split('/')
     return False if mes not in meses or int(ano) < 2026 or int(ano) > 2040 else mes, ano

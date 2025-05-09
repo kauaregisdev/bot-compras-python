@@ -72,6 +72,15 @@ while True:
     else:
         break
 
+while True:
+    senha = t.receber_senha()
+    senha = v.check_senha(senha)
+    if not senha:
+        print('Senha inválida!')
+        continue
+    else:
+        break
+
 if conta in ['n', 'N']:
     while True:
         nome = t.receber_nome()
@@ -150,21 +159,103 @@ while True:
 
 if escolha_metodo == '1':
     while True:
-        ...
+        num_cartao = t.receber_num_cartao()
+        num_cartao = v.validar_num_cartao(num_cartao)
+        if not num_cartao:
+            print('Número inválido!')
+            continue
+        else:
+            break
 
     while True:
-        ...
+        nome_titular = t.receber_nome_titular()
+        nome_titular = v.check_nome(nome_titular)
+        if not nome_titular:
+            print('Número inválido!')
+            continue
+        else:
+            break
     
     while True:
-        ...
+        cpf_titular = t.receber_cpf_titular()
+        cpf_titular = v.check_cpf(cpf_titular)
+        if not cpf_titular:
+            print('CPF inválido!')
+            continue
+        else:
+            break
 
     while True:
-        ...
+        validade_cartao = t.receber_validade_cartao()
+        validade_cartao = v.validar_validade(validade_cartao)
+        if not validade_cartao:
+            print('Validade inválida!')
+            continue
+        else:
+            mes, ano = v.validar_mes_ano(validade_cartao)
+            break
 
     while True:
-        ...
+        cod_seg = t.receber_cod_seg()
+        cod_seg = v.validar_cod_seg(cod_seg)
+        if not cod_seg:
+            print('Código inválido!')
+            continue
+        else:
+            break
+
+    while True:
+        parcelas = t.escolher_parcelas()
+        parcelas = v.validar_parcelas(parcelas)
+        if not parcelas:
+            print('Parcela inválida!')
+            continue
+        else:
+            break
 
 try: # executa o bot
-    ...
+    driver = a.iniciar()
+    a.abrir_site(driver)
+    a.barra_pesquisa(driver, pesquisa)
+    a.localizar_produto(driver)
+
+    if sabor:
+        a.localizar_sabor(driver, sabor)
+
+    a.adicionar_carrinho(driver)
+    a.ir_carrinho(driver)
+    a.calcular_frete(driver, cep)
+
+    if cupom:
+        a.preencher_cupom(driver, cupom)
+
+    a.ir_pagina_final(driver)
+    a.preencher_cpf(driver, cpf)
+
+    if conta in ['s', 'S']:
+        a.inserir_senha(driver, senha)
+    else:
+        a.inserir_nome(driver, nome)
+        a.inserir_email(driver, email)
+        a.inserir_telefone(driver, tel)
+        a.inserir_sexo(driver, sexo)
+        a.criar_senha(driver, senha)
+
+    if endereco in ['n', 'N']:
+        a.cadastrar_endereco(driver, num_residencia)
+    a.ir_pagamento(driver)
+    a.localizar_metodo_pag(driver, metodo_pag)
+
+    if escolha_metodo == '1':
+        a.inserir_num_cartao(driver, num_cartao)
+        a.inserir_nome_titular(driver, nome_titular)
+        a.inserir_cpf_titular(driver, cpf_titular)
+        a.inserir_mes_validade(driver, mes)
+        a.inserir_ano_validade(driver, ano)
+        a.inserir_cod_seg(driver, cod_seg)
+        a.inserir_campo_parcelas(driver, parcelas)
+
+    a.finalizar_compra(driver)
+
 finally: # fecha o navegador
-    a.finalizar()
+    a.finalizar(driver)
