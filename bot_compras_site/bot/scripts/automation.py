@@ -2,10 +2,8 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.service import Service
-from pyautogui import press
 from time import sleep
 
-# configurando o webdriver
 driver_path = r"bot\scripts\chromedriver.exe" # caminho do chromedriver
 driver = webdriver.Chrome(service=Service(driver_path), options=webdriver.ChromeOptions()) # criando o objeto do webdriver
 
@@ -204,3 +202,6 @@ def finalizar_compra(): # finaliza compra
     sleep(1)
     botao_finalizar_compra.click() # aperta no botão de finalizar compra
     sleep(10)
+
+def finalizar():
+    driver.quit()

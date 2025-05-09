@@ -86,30 +86,14 @@ def gen_cpf():
     print(f'O CPF gerado é {cpf_input}.')
 
 def check_cpf(cpf_input):
-    from os import system
-    soma_cpf = 0
-    multi = 10
-    
-    if not cpf_input.isnumeric():
-        system('cls')
-        print('Digite números, sem letras ou espaços vazios.')
-        
-    if cpf_input == cpf_input[0] * len(cpf_input):
-        system('cls')
-        print('Digite números distintos.')
-    
-    if len(cpf_input) != 11:
-        system('cls')
-        print('Digite os 11 números do CPF.')
-
+    if not cpf_input.isnumeric() or len(cpf_input) != 11 or cpf_input == cpf_input[0] * len(cpf_input):
+        return False
     else:
-        system('cls')
         cpf_v = cpf_input[:9]
-
         digitos_verificadores(cpf_v)
 
         if cpf_input == cpf_v:
-            return True
+            return cpf_input
         else:
             return False
 
@@ -119,8 +103,11 @@ def check_cep(valor):
 def check_senha(valor):
     return valor if len(valor) >= 6 else False
 
+def possui_conta(valor):
+    return valor if valor in ['s', 'S', 'n', 'N'] else False
+
 def check_nome(valor):
-    return False if not ' ' in valor else valor
+    return valor if ' ' in valor else False
 
 def check_email(valor):
     from email_validator import validate_email, EmailNotValidError
@@ -136,6 +123,9 @@ def check_telefone(valor):
 def check_sexo(valor):
     return valor if valor in ['m', 'M', 'f', 'F'] else False
 
+def possui_endereco(valor):
+    return valor if valor in ['s', 'S', 'n', 'N'] else False
+
 def validar_num_residencia(valor):
     if not valor.isdigit():
         return False
@@ -143,21 +133,18 @@ def validar_num_residencia(valor):
         return valor
 
 def validar_cupom(valor):
-    valores = ['s', 'S', 'n', 'N']
-    if valor in valores:
-        valor = 'cariani' if valor in ['s', 'S'] else False
-        return valor
-    else:
-        return False
-    
+    return valor if valor in ['s', 'S', 'n', 'N'] else False
+
+def existe_cupom(valor):
+    return 'cariani' if valor in ['s', 'S'] else False
+
 def validar_metodo_pag(valor):  
     metodos = {
         '1': '//div[@data-tipo-pag="cartao"]',
         '2': '//div[@data-tipo-pag="boleto"]',
         '3': '//div[@data-tipo-pag="pix"]',
-    } 
+    }
     if valor in metodos:
-        digito_escolhido = valor
         valor = metodos[valor]
         return valor
     else:
