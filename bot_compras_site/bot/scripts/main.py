@@ -1,10 +1,11 @@
-def execute():
+def execute(produto):
     import automation as a
     import terminal as t
     import validate as v
     from time import sleep
     from os import system
 
+    print(f'Executando o bot para o produto: {produto}')
     t.exibir_boas_vindas() # apresenta o sistema
     sleep(10)
     system('cls')
@@ -307,5 +308,3 @@ def execute():
 
     finally: # fecha o navegador
         a.finalizar(driver)
-
-execute()

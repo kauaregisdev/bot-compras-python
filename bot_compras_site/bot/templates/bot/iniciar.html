@@ -1,4 +1,10 @@
-<form method="post">
+<form method="post" action="{% url 'bot:resultado' %}">
     {% csrf_token %}
-    <button type="submit">Iniciar compra</button>
+    <label for="produto">Escolha um produto:</label>
+    <select name="produto" id="produto">
+        <option value="1">Whey Protein</option>
+        <option value="2">Creatina</option>
+        <option value="3">Pré-treino</option>
+    </select>
+    <button type="submit">Enviar</button>
 </form>
