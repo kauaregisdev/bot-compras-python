@@ -32,7 +32,7 @@ pip install -r requirements.txt
 você deve colocá-lo no mesmo diretório do script (bot/scripts)
 
 5. execute o bot no terminal, com o comando:
-python script.py
+python main.py
 
 AVISO: A execução em Django não está funcionando ainda!
 
