@@ -1,6 +1,6 @@
 # este código sofrerá mudanças em breve, para melhoria da compreensão do sistema como um todo
 def executar_bot():
-    import functions as f
+    import bot_compras_site.bot.scripts.validate as f
     from selenium import webdriver
     from selenium.webdriver.common.by import By
     from selenium.webdriver.common.keys import Keys

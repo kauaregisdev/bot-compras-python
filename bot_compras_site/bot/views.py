@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .scripts.script import executar_bot # função que executa o bot
+from .scripts.main import executar_bot # função que executa o bot
 
 def iniciar_compra(request):
     if request.method == 'POST':
