@@ -81,24 +81,24 @@ def gen_cpf():
     for i in range(9):
         cpf_input += str(randint(0, 9))
 
-    digitos_verificadores(cpf_input)
+    cpf = digitos_verificadores(cpf_input)
 
-    print(f'O CPF gerado é {cpf_input}.')
+    print(f'O CPF gerado é {cpf}.')
 
 def check_cpf(cpf_input):
     if not cpf_input.isnumeric() or len(cpf_input) != 11 or cpf_input == cpf_input[0] * len(cpf_input):
         return False
     else:
         cpf_v = cpf_input[:9]
-        digitos_verificadores(cpf_v)
+        cpf = digitos_verificadores(cpf_v)
 
-        if cpf_input == cpf_v:
+        if cpf_input == cpf:
             return cpf_input
         else:
             return False
 
 def check_cep(valor):
-    return valor if len(valor) == 8 and valor.isdigit() else False
+    return valor[:5]+'-'+valor[5:] if len(valor) == 8 and valor.isdigit() else False
 
 def possui_conta(valor):
     return valor if valor in ['s', 'S', 'n', 'N'] else False

@@ -5,7 +5,8 @@ from selenium.webdriver.chrome.service import Service
 from time import sleep
 
 def iniciar(): # inicia o bot
-    driver_path = r"bot\scripts\chromedriver.exe" # caminho do chromedriver
+    print('Iniciando o bot. Aguarde enquanto a compra é feita...')
+    driver_path = r"C:\Users\kauar\OneDrive\Documentos\GitHub\bot-compras-python\bot_compras_site\bot\scripts\chromedriver.exe" # caminho do chromedriver
     driver = webdriver.Chrome(service=Service(driver_path), options=webdriver.ChromeOptions()) # criando o objeto do webdriver
     return driver
 
@@ -142,9 +143,9 @@ def ir_pagamento(driver): # indo para a aba de pagamento
 def localizar_metodo_pag(driver, metodo_pag): # preenchendo os dados de pagamento
     botao_metodo = driver.find_element(By.XPATH, metodo_pag) # localiza o botão do método escolhido
     botao_metodo.click() # clica no botão do método escolhido
-    sleep(1)
 
 def inserir_num_cartao(driver, num_cartao): # insere o número do cartão de crédito
+    sleep(5)
     campo_num_cartao = driver.find_element(By.ID, 'cardNumber') # localiza o campo de número do cartão
     campo_num_cartao.click()
     sleep(1)
@@ -197,11 +198,10 @@ def inserir_campo_parcelas(driver, parcelas): # seleciona o número de parcelas
     sleep(1)
     campo_select_parcelas = Select(campo_parcelas)
     campo_select_parcelas.select_by_value(parcelas)
-    sleep(5)
 
 def finalizar_compra(driver): # finaliza compra
+    sleep(5)
     botao_finalizar_compra = driver.find_element(By.ID, 'finalizarPedido') # localiza o botão de finalizar compra
-    sleep(1)
     botao_finalizar_compra.click() # aperta no botão de finalizar compra
     sleep(10)
 
