@@ -1,10 +1,9 @@
+{% extends 'bot/base.html' %}
+
+{% block title %}Página Inicial{% endblock %}
+
+{% block content %}
 <form method="post" action="{% url 'bot:resultado' %}">
-    {% csrf_token %}
-    <label for="produto">Escolha um produto:</label>
-    <select name="produto" id="produto">
-        <option value="1">Whey Protein</option>
-        <option value="2">Creatina</option>
-        <option value="3">Pré-treino</option>
-    </select>
-    <button type="submit">Enviar</button>
+    <button type="submit">Iniciar compra</button>
 </form>
+{$ endblock %}

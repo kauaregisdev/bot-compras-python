@@ -1,4 +1,4 @@
-def execute(produto):
+def execute():
     import automation as a
     import terminal as t
     import validate as v
@@ -308,3 +308,5 @@ def execute(produto):
 
     finally: # fecha o navegador
         a.finalizar(driver)
+
+execute()
