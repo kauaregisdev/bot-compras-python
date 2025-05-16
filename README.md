@@ -15,7 +15,7 @@ Chromedriver: https://storage.googleapis.com/chrome-for-testing-public/136.0.710
 
 Para baixar as dependências necessárias: pip install -r requirements.txt
 
-Como executar o código:
+## Como executar o código:
 1. clone o repositório, executando no terminal os seguintes comandos:
 git clone https://github.com/kauaregisdev/bot-compras-python.git
 cd bot-compras-python
